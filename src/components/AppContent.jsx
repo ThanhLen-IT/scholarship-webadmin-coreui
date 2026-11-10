@@ -55,7 +55,16 @@ const AppContent = () => {
               )
             )
           })}
-          <Route path="/" element={<Navigate to="dashboard" replace />} />
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route
+            path="*"
+            element={
+              <div>
+                <h2>Không tìm thấy trang</h2>
+                <a href="#/dashboard">Về tổng quan</a>
+              </div>
+            }
+          />
         </Routes>
       </Suspense>
     </CContainer>

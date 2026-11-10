@@ -1,115 +1,78 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import {
+  CAlert,
   CButton,
   CCard,
   CCardBody,
-  CCol,
   CContainer,
   CForm,
-  CFormCheck,
   CFormInput,
-  CFormLabel,
-  CInputGroup,
-  CInputGroupText,
-  CRow,
-  CTooltip,
+  CSpinner,
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import { apple } from 'src/assets/brand/apple'
-import { google } from 'src/assets/brand/google'
-import { logo } from 'src/assets/brand/logo'
-import { eye } from 'src/assets/icons/eye'
-
-const Login = () => {
+import { useAuth } from '../../../auth/AuthContext'
+export default function Login() {
+  const { user, login } = useAuth()
+  const navigate = useNavigate()
+  const location = useLocation()
+  const [identifier, setIdentifier] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+  const [busy, setBusy] = useState(false)
+  const destination = location.state?.from || '/dashboard'
+  if (user) return <Navigate to={destination} replace />
+  async function submit(event) {
+    event.preventDefault()
+    setBusy(true)
+    setError('')
+    try {
+      await login(identifier, password)
+      navigate(destination, { replace: true })
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setBusy(false)
+    }
+  }
   return (
-    <div className="bg-body-tertiary min-vh-100 d-flex flex-row align-items-center">
+    <div className="bg-body-tertiary min-vh-100 d-flex align-items-center">
       <CContainer>
-        <CRow className="justify-content-center">
-          <CCol md={8} lg={6} xl={5}>
-            <div className="d-flex flex-column gap-4">
-              <div className="text-center">
-                <CIcon icon={logo} height={48} />
-              </div>
-              <CCard className="p-4">
-                <CCardBody className="d-flex flex-column gap-4">
-                  <h2 className="h5 text-center mb-0">Login to your account</h2>
-                  <CForm className="row gy-3">
-                    <CCol xs={12}>
-                      <CFormLabel htmlFor="email">Email address</CFormLabel>
-                      <CFormInput
-                        id="email"
-                        type="email"
-                        placeholder="your@email.com"
-                        autoComplete="email"
-                      />
-                    </CCol>
-                    <CCol xs={12}>
-                      <div className="d-flex justify-content-between">
-                        <CFormLabel htmlFor="password">Password</CFormLabel>
-                        <Link to="/authentication/reset-password">I forgot password</Link>
-                      </div>
-                      <CInputGroup>
-                        <CFormInput
-                          id="password"
-                          type="password"
-                          placeholder="Your password"
-                          autoComplete="current-password"
-                        />
-                        <CInputGroupText>
-                          <CTooltip content="Show password">
-                            <CButton
-                              type="button"
-                              color="link"
-                              className="p-0 link-secondary"
-                              aria-label="Show password"
-                            >
-                              <CIcon icon={eye} size="sm" />
-                            </CButton>
-                          </CTooltip>
-                        </CInputGroupText>
-                      </CInputGroup>
-                    </CCol>
-                    <CCol xs={12}>
-                      <CFormCheck id="rememberMe" label="Remember me on this device" />
-                    </CCol>
-                    <CCol xs={12}>
-                      <CButton color="primary" type="submit" className="w-100">
-                        Sign in
-                      </CButton>
-                    </CCol>
-                  </CForm>
-                  <div className="position-relative">
-                    <hr />
-                    <div className="position-absolute top-50 start-50 translate-middle bg-body px-2 text-body-tertiary text-uppercase small">
-                      or
-                    </div>
-                  </div>
-                  <CRow>
-                    <CCol>
-                      <CButton type="button" variant="outline" className="w-100">
-                        <CIcon icon={google} className="me-1" />
-                        Login with Google
-                      </CButton>
-                    </CCol>
-                    <CCol>
-                      <CButton type="button" variant="outline" className="w-100">
-                        <CIcon icon={apple} className="me-1" />
-                        Login with Apple
-                      </CButton>
-                    </CCol>
-                  </CRow>
-                </CCardBody>
-              </CCard>
-              <div className="text-center text-body-secondary">
-                Need an account? <Link to="/authentication/register">Sign up</Link>
-              </div>
-            </div>
-          </CCol>
-        </CRow>
+        <CCard className="mx-auto" style={{ maxWidth: 460 }}>
+          <CCardBody className="p-4 p-md-5">
+            <h1>Đăng nhập admin</h1>
+            <p className="text-body-secondary">Scholarship Gateway</p>
+            <CForm onSubmit={submit}>
+              {error && (
+                <CAlert color="danger" role="alert">
+                  {error}
+                </CAlert>
+              )}
+              <CFormInput
+                className="mb-3"
+                id="login-identifier"
+                label="Email hoặc username"
+                autoComplete="username"
+                required
+                value={identifier}
+                onChange={(e) => setIdentifier(e.target.value)}
+              />
+              <CFormInput
+                className="mb-4"
+                id="login-password"
+                label="Mật khẩu"
+                type="password"
+                autoComplete="current-password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <CButton type="submit" color="primary" className="w-100" disabled={busy}>
+                {busy ? <CSpinner size="sm" /> : 'Đăng nhập'}
+              </CButton>
+            </CForm>
+          </CCardBody>
+        </CCard>
       </CContainer>
     </div>
   )
 }
-
-export default Login
