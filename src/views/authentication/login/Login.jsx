@@ -39,6 +39,13 @@ export default function Login() {
       <CContainer>
         <CCard className="mx-auto" style={{ maxWidth: 460 }}>
           <CCardBody className="p-4 p-md-5">
+            <img
+              className="rounded mb-3"
+              src={`${import.meta.env.BASE_URL}scholarship-logo.webp`}
+              alt=""
+              width={64}
+              height={64}
+            />
             <h1>Đăng nhập admin</h1>
             <p className="text-body-secondary">Scholarship Gateway</p>
             <CForm onSubmit={submit}>
