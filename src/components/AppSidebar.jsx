@@ -21,6 +21,7 @@
 
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import {
   CCloseButton,
@@ -65,9 +66,24 @@ const AppSidebar = () => {
       }}
     >
       <CSidebarHeader className="border-bottom">
-        <CSidebarBrand to="/">
-          <span className="sidebar-brand-full fw-bold">Scholarship Admin</span>
-          <span className="sidebar-brand-narrow fw-bold">SG</span>
+        <CSidebarBrand as={Link} to="/dashboard" aria-label="Scholarship Admin · Tổng quan">
+          <span className="sidebar-brand-full fw-bold">
+            <img
+              src={`${import.meta.env.BASE_URL}scholarship-logo.webp`}
+              alt=""
+              width={32}
+              height={32}
+              className="me-2 rounded"
+            />
+            Scholarship Admin
+          </span>
+          <img
+            className="sidebar-brand-narrow rounded"
+            src={`${import.meta.env.BASE_URL}scholarship-logo.webp`}
+            alt=""
+            width={32}
+            height={32}
+          />
         </CSidebarBrand>
         <CCloseButton
           className="d-lg-none"

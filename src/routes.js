@@ -2,6 +2,11 @@ import { lazy } from 'react'
 export const routes = [
   { path: '/dashboard', name: 'Tổng quan', element: lazy(() => import('./views/admin/Overview')) },
   {
+    path: '/monitoring',
+    name: 'Giám sát hệ thống',
+    element: lazy(() => import('./views/admin/Monitoring')),
+  },
+  {
     path: '/scholarships',
     name: 'Quản lý học bổng',
     element: lazy(() => import('./views/admin/Scholarships')),
