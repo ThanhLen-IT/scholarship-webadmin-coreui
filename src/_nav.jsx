@@ -5,4 +5,6 @@ export default [
   { component: CNavItem, name: 'Quản lý học bổng', to: '/scholarships' },
   { component: CNavItem, name: 'Crawler', to: '/crawler' },
   { component: CNavItem, name: 'Xác minh mentor', to: '/mentor-verifications' },
+  { component: CNavItem, name: 'Nhật ký xét duyệt', to: '/review-audit' },
+  { component: CNavItem, name: 'Hộp thư hỗ trợ', to: '/support' },
 ]

@@ -17,4 +17,14 @@ export const routes = [
     name: 'Xác minh mentor',
     element: lazy(() => import('./views/admin/Mentors')),
   },
+  {
+    path: '/review-audit',
+    name: 'Nhật ký xét duyệt',
+    element: lazy(() => import('./views/admin/ReviewAudit')),
+  },
+  {
+    path: '/support',
+    name: 'Hộp thư hỗ trợ',
+    element: lazy(() => import('./views/admin/Support')),
+  },
 ]

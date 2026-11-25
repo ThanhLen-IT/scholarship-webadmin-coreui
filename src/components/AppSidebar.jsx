@@ -66,7 +66,7 @@ const AppSidebar = () => {
       }}
     >
       <CSidebarHeader className="border-bottom">
-        <CSidebarBrand as={Link} to="/dashboard" aria-label="Scholarship Admin · Tổng quan">
+        <CSidebarBrand as={Link} to="/dashboard" aria-label="Global Succsess · Tổng quan">
           <span className="sidebar-brand-full fw-bold">
             <img
               src={`${import.meta.env.BASE_URL}scholarship-logo.webp`}
@@ -75,7 +75,7 @@ const AppSidebar = () => {
               height={32}
               className="me-2 rounded"
             />
-            Scholarship Admin
+            Global Succsess
           </span>
           <img
             className="sidebar-brand-narrow rounded"
