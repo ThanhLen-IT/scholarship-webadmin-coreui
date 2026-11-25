@@ -47,7 +47,7 @@ export default function Login() {
               height={64}
             />
             <h1>Đăng nhập admin</h1>
-            <p className="text-body-secondary">Scholarship Gateway</p>
+            <p className="text-body-secondary">Global Succsess</p>
             <CForm onSubmit={submit}>
               {error && (
                 <CAlert color="danger" role="alert">
