@@ -1,4 +1,4 @@
-# Scholarship Gateway Web Admin
+# Global Succsess Web Admin
 
 ## Chạy local
 
@@ -17,9 +17,11 @@ Vite chuyển `/api` đến `http://localhost:5000`. Nếu backend dùng cổng 
 - Học bổng mới ở trạng thái chờ duyệt. Chỉ hồ sơ pending có nút duyệt/từ chối; backend là nguồn quyết định quyền và chuyển trạng thái.
 - Crawler: chọn nguồn đang bật, khởi chạy, theo dõi trạng thái mỗi 5 giây và lịch sử mỗi 10 giây, phân trang lịch sử, mở danh sách học bổng chờ duyệt.
 - Mentor: lọc/phân trang hồ sơ; tải PDF bằng request có Bearer token; duyệt/từ chối kèm ghi chú.
-- Tổng quan: các đường dẫn quản trị, không hiển thị số liệu giả.
+- Tổng quan: số học bổng chờ duyệt, số đã công khai, số hồ sơ mentor chờ duyệt và lượt crawl gần nhất.
+- Nhật ký xét duyệt: tra quyết định học bổng hoặc mentor và lọc theo đối tượng, kết quả. Backend cần chạy `npm run migrate:mobile` để ghi các quyết định mới.
+- Hộp thư hỗ trợ: đọc ticket theo trạng thái, gửi phản hồi cho ticket đang mở và xem lại ticket đã giải quyết. Khi gửi thành công, backend đánh dấu đã giải quyết và tạo thông báo cho người gửi.
 
-Chưa thêm quản lý toàn bộ người dùng, hỗ trợ, analytics hoặc quản lý kết quả mentoring vì backend chưa có đủ API đọc/quản trị cho các trang này.
+Quản lý toàn bộ người dùng, phân tích hoạt động người dùng và quản lý kết quả mentoring vẫn nằm ngoài các trang hiện có.
 
 ## Build và deploy
 
@@ -35,5 +37,6 @@ Nếu deploy khác host, đặt `VITE_API_BASE_URL` trước khi build (ví dụ
 - Duyệt/từ chối/lưu trữ học bổng; hủy dialog không gửi request; xóa chỉ bằng dữ liệu thử.
 - Chạy crawler trên môi trường thử, theo dõi hoàn thành và tìm học bổng chờ duyệt.
 - Tải PDF mentor, duyệt/từ chối hồ sơ pending; hồ sơ đã quyết định không còn nút quyết định.
+- Tạo ticket bằng tài khoản thử, trả lời trong Hộp thư hỗ trợ. Kiểm tra ticket xuất hiện trong bộ lọc Đã giải quyết, rồi mở thông báo và lịch sử hỗ trợ bằng tài khoản gửi ticket.
 
 Không chạy crawler hoặc sửa dữ liệu production trong kiểm tra tự động.

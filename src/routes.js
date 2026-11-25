@@ -22,4 +22,9 @@ export const routes = [
     name: 'Nhật ký xét duyệt',
     element: lazy(() => import('./views/admin/ReviewAudit')),
   },
+  {
+    path: '/support',
+    name: 'Hộp thư hỗ trợ',
+    element: lazy(() => import('./views/admin/Support')),
+  },
 ]
